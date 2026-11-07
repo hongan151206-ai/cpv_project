@@ -1,0 +1,41 @@
+# Cấu hình chung. Mỗi demo là một preset (config/snack.yaml, config/coconut.yaml) ghi đè lên file này.
+# Thứ tự ưu tiên: settings.yaml < preset < .env / biến môi trường < tham số dòng lệnh.
+# Đường dẫn tương đối được tính từ thư mục project.
+
+app:
+  name: Conveyor Object Counter  # tiêu đề cửa sổ hiển thị
+
+data:
+  output: outputs
+  model: models
+
+input:
+  vid_stride: 1     # xử lý mỗi N frame; giữ 1 nếu cần đếm chính xác
+  display: true
+  realtime: true    # khi hiển thị, phát đúng tốc độ video gốc
+
+detector:
+  # Để thấp có chủ đích: ByteTrack dùng cả box độ tin cậy thấp để giữ track không bị đứt.
+  # Box lọc ở đây sẽ không đến được tracker. Ngưỡng tạo track mới nằm trong config/bytetrack.yaml.
+  conf_threshold: 0.1
+  iou_threshold: 0.7  # ngưỡng NMS; không có tác dụng với snack.pt, coconut.pt vì YOLO26 không dùng NMS
+  classes: null     # null: mọi class của model, hoặc danh sách như [0]
+  max_det: 100
+  device: null      # null: tự chọn, hoặc 'cpu', 'cuda', 'mps'
+  imgsz: null       # null: mặc định của model (640)
+
+saver:
+  save_images: false      # ảnh từng frame đã vẽ
+  save_videos: false      # video kết quả result.mp4
+  save_detections: false  # file txt: class track_id conf x1 y1 x2 y2
+  save_crops: false       # ảnh crop từng vật
+
+tracker:
+  config: config/bytetrack.yaml
+
+visualizer:
+  show_detections: true   # vẽ box và nhãn
+  show_tracks: true       # hiện track_id và chấm tâm
+  show_count: true        # hiện số đếm
+  min_display_conf: 0.25  # chỉ ẩn box độ tin cậy thấp khi vẽ; tracker và counter vẫn dùng chúng
+  labels: {}              # tên ngắn cho class, ví dụ {0: Snack}

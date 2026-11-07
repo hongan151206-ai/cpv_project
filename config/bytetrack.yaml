@@ -1,0 +1,8 @@
+# Tham số ByteTrack. Được truyền vào model.track(tracker=...).
+tracker_type: bytetrack
+track_high_thresh: 0.25  # box từ ngưỡng này được ghép ở vòng đầu
+track_low_thresh: 0.1    # box từ ngưỡng này đến track_high_thresh được ghép ở vòng hai để giữ track
+new_track_thresh: 0.5    # box chưa ghép được phải đạt ngưỡng này mới tạo track mới; mặc định 0.25 sinh nhiều ID thừa
+track_buffer: 30         # số frame giữ track đã mất dấu trước khi xóa
+match_thresh: 0.8        # ngưỡng chi phí khi ghép (1 - IoU); càng cao càng dễ ghép
+fuse_score: true         # kết hợp độ tin cậy vào chi phí ghép

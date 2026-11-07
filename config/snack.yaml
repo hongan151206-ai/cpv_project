@@ -1,0 +1,16 @@
+# Demo: đếm gói snack trên băng chuyền.
+input:
+  path: inputs/videos/snack-converyo-belt.mp4
+
+detector:
+  type: snack
+
+counters:
+  # Đường chéo cắt ngang băng chuyền, vật đi xuống bên phải nên chỉ đếm chiều "positive".
+  - type: line
+    start: [710, 547]
+    end: [931, 384]
+    direction: positive
+
+visualizer:
+  labels: {0: Snack}

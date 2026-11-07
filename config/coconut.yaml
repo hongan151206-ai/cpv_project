@@ -1,0 +1,18 @@
+# Demo: đếm dừa trên băng chuyền (video tua nhanh 4 lần).
+input:
+  path: inputs/videos/converyo_belt_4x_speed.mp4
+
+detector:
+  type: coconut
+
+counters:
+  # Đường ngang vẽ từ trái sang phải, dừa đi từ dưới lên nên chỉ đếm chiều "negative".
+  - type: line
+    start: [300, 540]
+    end: [1200, 540]
+    direction: negative
+    # YOLO26 không có NMS nên đôi khi có hai box trên một quả dừa; bỏ lần đếm thứ hai cùng frame.
+    duplicate_iou: 0.6
+
+visualizer:
+  labels: {0: Coconut}

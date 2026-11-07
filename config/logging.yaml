@@ -1,0 +1,27 @@
+version: 1
+# Bắt buộc: các module tạo logger lúc import (trước khi setup_logging chạy).
+# Nếu để mặc định (true), toàn bộ logger đó bị tắt và không có dòng log nào.
+disable_existing_loggers: false
+
+formatters:
+  simple:
+    format: '[%(asctime)s] %(levelname)s - %(name)s - %(message)s'
+    datefmt: '%Y-%m-%d %H:%M:%S'
+
+handlers:
+  console:
+    class: logging.StreamHandler
+    level: INFO
+    formatter: simple
+    stream: ext://sys.stdout
+
+  file:
+    class: logging.FileHandler
+    level: INFO
+    formatter: simple
+    filename: logs/application.log  # setup_logging đổi thành đường dẫn tuyệt đối
+    encoding: utf-8
+
+root:
+  level: INFO
+  handlers: [console, file]

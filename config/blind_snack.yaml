@@ -1,0 +1,14 @@
+# Dùng để đếm tay: giống snack.yaml nhưng ẩn số đếm, khung và track của hệ thống.
+input:
+  path: inputs/videos/snack-converyo-belt.mp4
+detector:
+  type: snack
+counters:
+  - type: line
+    start: [710, 547]
+    end: [931, 384]
+    direction: positive
+visualizer:
+  show_count: false
+  show_detections: false
+  show_tracks: false

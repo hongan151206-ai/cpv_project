@@ -1,0 +1,20 @@
+# Dùng để đếm tay: vẽ đường đếm nhưng ẩn số đếm, box và chấm tâm để người đếm không bị ảnh hưởng.
+# Đổi input.path và detector.type (và đường đếm) cho khớp video cần đếm.
+input:
+  path: inputs/videos/converyo_belt_4x_speed.mp4
+
+detector:
+  type: coconut
+
+counters:
+  - type: line
+    start: [300, 540]
+    end: [1200, 540]
+    direction: negative
+    # YOLO26 không có NMS nên đôi khi có hai box trên một quả dừa; bỏ lần đếm thứ hai cùng frame.
+    duplicate_iou: 0.6
+
+visualizer:
+  show_count: false
+  show_detections: false
+  show_tracks: false
